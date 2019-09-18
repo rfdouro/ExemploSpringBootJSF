@@ -24,11 +24,11 @@ public class IndexController {
   System.out.println(req);
   System.out.println(""+req.getServletContext());
   System.out.println(""+req.getServletContext().getInitParameter("primefaces.THEME"));
-  return "index.jsf";
+  return "index.html";
  }
  
  @RequestMapping("/exlayout01")
  public String exlayout01() {
-  return "exlayout.jsf";
+  return "exlayout.html";
  }
 }

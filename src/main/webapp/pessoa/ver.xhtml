@@ -9,20 +9,12 @@
   <title>TO-DO application</title>
  </h:head>
  <h:body>
-  <ui:composition template="templates/LAYOUT01.xhtml">
+  <ui:composition template="../templates/LAYOUT01.xhtml">
    <ui:define name="main">
     <div>
-     <p>Welcome in the TO-DO application!</p>
-     <p style="height:50px">
-      This is a static message rendered from xhtml.
-     </p>
+     <p>Cadastro de pessoas!</p>
+     ${IDENT}
     </div>
-
-    <h:form>
-     <p:linkButton outcome="#{jsfController.loadTodoPage2()}" value="A fazer"/>
-     <p:outputLabel for="button" value="Button:" />
-     <p:calendar id="button" showOn="button" />
-    </h:form>
    </ui:define>
   </ui:composition>
  </h:body>

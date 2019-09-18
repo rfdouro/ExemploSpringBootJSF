@@ -14,7 +14,7 @@
   <h:form>
    <pe:layout fullPage="true">
     <pe:layoutPane position="north" resizable="false" closable="false">  
-     <span style="text-align: center; position: relative; left: 50%; margin-left: -200px">
+     <span style="text-align: center; position: relative; left: 50%; margin-left: -200px; font-size: larger; font-style: oblique ">
       Aplicação de Exemplo - Integração SpringBoot + JSF (Primefaces) 
      </span>
     </pe:layoutPane> 
@@ -25,6 +25,8 @@
       </p:submenu>
       <p:submenu label="Outros">
        <p:menuitem value="A fazer"  ajax="false" icon="pi pi-times" outcome="#{jsfController.loadTodoPage2()}"/>
+       <p:menuitem value="Pessoas"  ajax="false" icon="pi pi-times" url="/pessoa/"/>
+       <p:menuitem value="Pessoas"  ajax="false" icon="pi pi-times" url="/pessoa/ver?id=123"/>
       </p:submenu>
       <p:separator />
       <p:submenu label="Externos" >

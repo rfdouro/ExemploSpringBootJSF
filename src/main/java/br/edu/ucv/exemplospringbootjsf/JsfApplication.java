@@ -14,6 +14,10 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.JstlView;
 
 /**
  *
@@ -24,23 +28,45 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
  * <a href="https://pt.stackoverflow.com/questions/101842/erro-java-lang-noclassdeffounderror-em-java-web-com-jsf?answertab=votes#tab-top">Acerto</a>
  */
 @SpringBootApplication
-public class JsfApplication extends SpringBootServletInitializer implements ServletContextInitializer {
+public class JsfApplication extends SpringBootServletInitializer implements ServletContextInitializer, WebMvcConfigurer {
 
  public static void main(String[] args) {
   SpringApplication.run(JsfApplication.class, args);
  }
 
- @Bean
+ /*@Bean
  public ServletRegistrationBean servletRegistrationBean() {
   FacesServlet servlet = new FacesServlet();
   ServletRegistrationBean servletRegistrationBean
           = new ServletRegistrationBean(servlet, "*.jsf");
   return servletRegistrationBean;
- }
-
+ }*/
+ 
+ /*@Override
+ public void configureViewResolvers(ViewResolverRegistry registry) {
+  //registry.jsp("/WEB-INF/jsp/", ".jsp");
+  InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+  resolver.setPrefix("/WEB-INF/jsp/");
+  //resolver.setSuffix(".html");
+  //resolver.setViewClass(JstlView.class);
+  registry.viewResolver(resolver);
+ }*/
+ 
  @Override
  public void onStartup(ServletContext servletContext) throws ServletException {
-   servletContext.setInitParameter("primefaces.THEME", "redmond");
+  AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
+  ctx.register(JsfApplication.class);
+  ctx.setServletContext(servletContext);
+  
+  ServletRegistration.Dynamic servlet = servletContext.addServlet("Faces Servlet", new FacesServlet());
+  servlet.addMapping("*.html");
+  //servlet.addMapping("/");
+  servlet.setLoadOnStartup(1);
+          
+  
+  //servletContext.setInitParameter("primefaces.THEME", "redmond");
+  //servletContext.setInitParameter("primefaces.THEME", "none");
+  servletContext.setInitParameter("primefaces.THEME", "start");
  }
 
 }
