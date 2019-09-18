@@ -43,4 +43,11 @@ public class TodoService {
  public Todo getTodo() {
   return todo;
  }
+ 
+ public void selectTodo(int id){
+  System.out.println(id);
+  todo = todoDao.get(id).get();
+  todoDao.delete(todo);
+  todo = new Todo();
+ }
 }
