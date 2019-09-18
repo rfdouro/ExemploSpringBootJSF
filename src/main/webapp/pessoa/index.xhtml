@@ -12,8 +12,33 @@
   <ui:composition template="../templates/LAYOUT01.xhtml">
    <ui:define name="main">
     <div>
-     <p>Cadastro de pessoas!</p>
+     <p>Cadastro de pessoas!--</p>
     </div>
+    
+     <p:outputLabel for="nome" value="Nome: "/>
+     <p:inputText id="nome" value="${pessoaService.pessoa.nome}"/>
+     <p:commandButton value="Salvar" action="${pessoaService.salva}" update="tabela"/>
+     <p:dataTable id="tabela" value="${pessoaService.todas}" var="p" emptyMessage="Sem registros">
+      <p:column>
+       <f:facet name="header">
+        Ações
+       </f:facet>
+       <p:commandButton action="${pessoaService.exclui(p.id)}" value="Excluir" update="tabela"/>
+      </p:column>
+      <p:column>
+       <f:facet name="header">
+        Id
+       </f:facet>
+       ${p.id}
+      </p:column>
+      <p:column>
+       <f:facet name="header">
+        Nome
+       </f:facet>
+       ${p.nome}
+      </p:column>
+     </p:dataTable>
+    
    </ui:define>
   </ui:composition>
  </h:body>
