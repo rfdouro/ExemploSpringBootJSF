@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  *
  * @author romulo.douro
  */
-@Scope(value = "request")
+@Scope(value = "session")
 @Component(value = "pessoaService")
 public class PessoaService {
 
@@ -30,6 +30,10 @@ public class PessoaService {
  public void setPessoa(Pessoa pessoa) {
   this.pessoa = pessoa;
  }
+ 
+ public void clear(){
+  this.pessoa = new Pessoa();
+ }
 
  public List<Pessoa> getTodas() {
   return repositorio.findAllByOrderByNome();
@@ -39,12 +43,23 @@ public class PessoaService {
   repositorio.save(pessoa);
   this.pessoa = new Pessoa();
  }
- 
- public void exclui(long id){
+
+ public void exclui(long id) {
   this.pessoa = this.repositorio.findById(id).get();
-  if(this.pessoa!=null){
+  if (this.pessoa != null) {
    repositorio.delete(pessoa);
   }
   this.pessoa = new Pessoa();
+ }
+ 
+ public void exclui() {
+  if (this.pessoa != null) {
+   repositorio.delete(pessoa);
+   this.pessoa = new Pessoa();
+  }
+ }
+
+ public void seleciona(long id) {
+  this.pessoa = this.repositorio.findById(id).get();
  }
 }

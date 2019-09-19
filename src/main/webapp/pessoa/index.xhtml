@@ -14,31 +14,39 @@
     <div>
      <p>Cadastro de pessoas!--</p>
     </div>
-    
-     <p:outputLabel for="nome" value="Nome: "/>
-     <p:inputText id="nome" value="${pessoaService.pessoa.nome}"/>
-     <p:commandButton value="Salvar" action="${pessoaService.salva}" update="tabela"/>
-     <p:dataTable id="tabela" value="${pessoaService.todas}" var="p" emptyMessage="Sem registros">
-      <p:column>
-       <f:facet name="header">
-        Ações
-       </f:facet>
-       <p:commandButton action="${pessoaService.exclui(p.id)}" value="Excluir" update="tabela"/>
-      </p:column>
-      <p:column>
-       <f:facet name="header">
-        Id
-       </f:facet>
-       ${p.id}
-      </p:column>
-      <p:column>
-       <f:facet name="header">
-        Nome
-       </f:facet>
-       ${p.nome}
-      </p:column>
-     </p:dataTable>
-    
+
+    <p:outputLabel for="nome" value="Nome: "/>
+    <p:inputText id="nome" value="${pessoaService.pessoa.nome}"/>
+    <p:commandButton value="Salvar" action="${pessoaService.salva}" update="tabela"/>
+    <p:dataTable id="tabela" value="${pessoaService.todas}" var="p" emptyMessage="Sem registros">
+     <p:column>
+      <f:facet name="header">
+       Ações
+      </f:facet>
+      <p:commandButton action="${pessoaService.exclui(p.id)}" value="Excluir" update="tabela"/>
+      <p:commandButton value="Excluir" action="${pessoaService.seleciona(p.id)}" update="@form:dialogExclui" oncomplete="PF('dialogExclui').show();"/>
+     </p:column>
+     <p:column>
+      <f:facet name="header">
+       Id
+      </f:facet>
+      ${p.id}
+     </p:column>
+     <p:column>
+      <f:facet name="header">
+       Nome
+      </f:facet>
+      ${p.nome}
+     </p:column>
+    </p:dataTable>
+
+    <p:dialog header="Confirmação" widgetVar="dialogExclui" id="dialogExclui" modal="true" appendTo="@(body)" minHeight="40">
+     <h:outputText value="Confirma a exclusão? de ${pessoaService.pessoa.nome} ${pessoaService.pessoa.id}" />
+     <br/>
+     <p:commandButton value="Sim" action="${pessoaService.exclui()}" update="tabela" oncomplete="PF('dialogExclui').hide();" />
+     <p:commandButton value="Não" action="${pessoaService.clear()}" onclick="PF('dialogExclui').hide();" />
+    </p:dialog>
+
    </ui:define>
   </ui:composition>
  </h:body>
