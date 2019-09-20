@@ -67,6 +67,7 @@ public class JsfApplication extends SpringBootServletInitializer implements Serv
   //servletContext.setInitParameter("primefaces.THEME", "redmond");
   //servletContext.setInitParameter("primefaces.THEME", "none");
   servletContext.setInitParameter("primefaces.THEME", "start");
+  servletContext.setInitParameter("primefaces.FONT_AWESOME", "true");
  }
 
 }

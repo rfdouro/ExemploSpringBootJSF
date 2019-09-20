@@ -21,7 +21,7 @@
     <h:form>
      <p:linkButton outcome="#{jsfController.loadTodoPage2()}" value="A fazer"/>
      <p:outputLabel for="button" value="Button:" />
-     <p:calendar id="button" showOn="button" />
+     <p:calendar pattern="dd/MM/yyyy" locale="pt" id="button" showOn="button" />
     </h:form>
    </ui:define>
   </ui:composition>

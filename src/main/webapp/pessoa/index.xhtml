@@ -24,7 +24,9 @@
        Ações
       </f:facet>
       <p:commandButton action="${pessoaService.exclui(p.id)}" value="Excluir" update="tabela"/>
-      <p:commandButton value="Excluir" action="${pessoaService.seleciona(p.id)}" update="@form:dialogExclui" oncomplete="PF('dialogExclui').show();"/>
+      <p:commandButton value="Excluir" icon="fa fa-trash"
+                       action="${pessoaService.seleciona(p.id)}" 
+                       update="@form:dialogExclui" oncomplete="PF('dialogExclui').show();"/>
      </p:column>
      <p:column>
       <f:facet name="header">
