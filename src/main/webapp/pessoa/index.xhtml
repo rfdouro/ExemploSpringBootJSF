@@ -14,19 +14,24 @@
     <div>
      <p>Cadastro de pessoas!--</p>
     </div>
+    <h:form>
+     <p:outputLabel value="Nome: "/>
+     <p:inputText value="${pessoaService.pessoa.nome}"/>
+     <p:commandButton value="Salvar" action="${pessoaService.salva}" update="tabela"/>
+    </h:form>
 
-    <p:outputLabel for="nome" value="Nome: "/>
-    <p:inputText id="nome" value="${pessoaService.pessoa.nome}"/>
-    <p:commandButton value="Salvar" action="${pessoaService.salva}" update="tabela"/>
     <p:dataTable id="tabela" value="${pessoaService.todas}" var="p" emptyMessage="Sem registros">
      <p:column>
       <f:facet name="header">
        Ações
       </f:facet>
-      <p:commandButton action="${pessoaService.exclui(p.id)}" value="Excluir" update="tabela"/>
+      <p:commandButton action="${pessoaService.exclui(p.id)}" icon="fa fa-trash" update="tabela"/>
       <p:commandButton value="Excluir" icon="fa fa-trash"
                        action="${pessoaService.seleciona(p.id)}" 
-                       update="@form:dialogExclui" oncomplete="PF('dialogExclui').show();"/>
+                       update="dialogExclui" oncomplete="PF('dialogExclui').show();"/>
+      <p:commandButton value="Alterar" icon="fa fa-edit"
+                       action="${pessoaService.seleciona(p.id)}" 
+                       update="dialogAltera" oncomplete="PF('dialogAltera').show();"/>
      </p:column>
      <p:column>
       <f:facet name="header">
@@ -42,11 +47,25 @@
      </p:column>
     </p:dataTable>
 
-    <p:dialog header="Confirmação" widgetVar="dialogExclui" id="dialogExclui" modal="true" appendTo="@(body)" minHeight="40">
-     <h:outputText value="Confirma a exclusão? de ${pessoaService.pessoa.nome} ${pessoaService.pessoa.id}" />
-     <br/>
-     <p:commandButton value="Sim" action="${pessoaService.exclui()}" update="tabela" oncomplete="PF('dialogExclui').hide();" />
-     <p:commandButton value="Não" action="${pessoaService.clear()}" onclick="PF('dialogExclui').hide();" />
+    <p:dialog header="Confirmação" widgetVar="dialogExclui" id="dialogExclui" 
+              modal="true" appendTo="@(body)" height="200" width="300" minHeight="200" minWidth="200">
+     <h:form>
+      <h:outputText value="Confirma a exclusão? de ${pessoaService.pessoa.nome} ${pessoaService.pessoa.id}" />
+      <br/>
+      <p:commandButton value="Sim" action="${pessoaService.exclui()}" update="tabela" oncomplete="PF('dialogExclui').hide();" />
+      <p:commandButton value="Não" action="${pessoaService.clear()}" onclick="PF('dialogExclui').hide();" />
+     </h:form>
+    </p:dialog>
+
+    <p:dialog header="Alterar" widgetVar="dialogAltera" id="dialogAltera" 
+              modal="true" appendTo="@(body)" height="200" width="300" minHeight="200" minWidth="200">
+     <h:form>
+      <p:outputLabel value="Nome: "/>
+      <p:inputText value="${pessoaService.pessoa.nome}" />
+      <br/>
+      <p:commandButton value="Sim" action="${pessoaService.salva()}" update="tabela" oncomplete="PF('dialogAltera').hide();" />
+      <p:commandButton value="Não" action="${pessoaService.clear()}" onclick="PF('dialogAltera').hide();" />
+     </h:form>
     </p:dialog>
 
    </ui:define>

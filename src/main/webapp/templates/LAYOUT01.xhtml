@@ -9,16 +9,21 @@
  <h:head>
   <title>Exemplo</title>
  </h:head>
- <h:body>
+ <h:body onload="PF('statusDialog').hide()">
   <link href="../resources/css/default.css" rel="stylesheet" type="text/css"/>
-  <h:form>
-   <pe:layout fullPage="true">
-    <pe:layoutPane position="north" resizable="false" closable="false">  
-     <span style="text-align: center; position: relative; left: 50%; margin-left: -200px; font-size: larger; font-style: oblique ">
-      Aplicação de Exemplo - Integração SpringBoot + JSF (Primefaces) 
-     </span>
-    </pe:layoutPane> 
-    <pe:layoutPane position="west" size="250px">  
+  <p:dialog widgetVar="statusDialog" visible="true" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+   <p:graphicImage url="../resources/images/ajaxloadingbar.gif" />
+  </p:dialog>
+  <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+
+  <pe:layout fullPage="true">
+   <pe:layoutPane position="north" resizable="false" closable="false">  
+    <span style="text-align: center; position: relative; left: 50%; margin-left: -200px; font-size: larger; font-style: oblique ">
+     Aplicação de Exemplo - Integração SpringBoot + JSF (Primefaces) 
+    </span>
+   </pe:layoutPane> 
+   <pe:layoutPane position="west" size="250px">  
+    <h:form>
      <p:panelMenu style="width:200px">
       <p:submenu label="Navegação">
        <p:menuitem value="Início" icon="pi pi-save" outcome="/index.html" />
@@ -41,22 +46,23 @@
        <p:menuitem value="????" icon="pi pi-mobile" />
       </p:submenu>
      </p:panelMenu>
-    </pe:layoutPane>  
-    <pe:layoutPane position="center">  
-     <f:facet name="header">  
-      <h:outputText value="--------"/>  
-     </f:facet>  
-     <ui:insert name="main" >
+    </h:form>
+   </pe:layoutPane>  
+   <pe:layoutPane position="center">  
+    <f:facet name="header">  
+     <h:outputText value="--------"/>  
+    </f:facet>  
+    <ui:insert name="main" >
 
-     </ui:insert>
-    </pe:layoutPane>  
-    <pe:layoutPane position="south" resizable="false" closable="false" >  
-     <span style="text-align: right; float: right">
-      2019 - rfdouro@gmail.com 
-     </span>
-    </pe:layoutPane> 
-   </pe:layout>  
-  </h:form>
+    </ui:insert>
+   </pe:layoutPane>  
+   <pe:layoutPane position="south" resizable="false" closable="false" >  
+    <span style="text-align: right; float: right">
+     2019 - rfdouro@gmail.com 
+    </span>
+   </pe:layoutPane> 
+  </pe:layout>  
+
   <script>
    PrimeFaces.locales['pt'] = {
     closeText: 'Fechar',

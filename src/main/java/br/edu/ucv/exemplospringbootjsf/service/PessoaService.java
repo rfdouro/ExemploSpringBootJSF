@@ -43,7 +43,7 @@ public class PessoaService {
   repositorio.save(pessoa);
   this.pessoa = new Pessoa();
  }
-
+ 
  public void exclui(long id) {
   this.pessoa = this.repositorio.findById(id).get();
   if (this.pessoa != null) {
